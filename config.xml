@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <allow-navigation href="*" />
     <engine name="browser" spec="~5.0.3" />
+    <allow-navigation href="http://192.168.79.135:8100" />
 </widget>
