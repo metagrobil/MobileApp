@@ -1,14 +1,13 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar style="min-height: 30px; padding-top: 5px">
+        <ion-title>Mobile App</ion-title>
+    </ion-navbar>
+<ion-toolbar  style="min-height: 30px;">
+        <ion-icon (click)="currentPage = 'metric'" class="icon-header" name="md-analytics" ></ion-icon>
+        <ion-icon (click)="currentPage = 'command'" class="icon-header" name="md-pulse"></ion-icon>
+        <ion-icon (click)="currentPage = ''" class="icon-header" name="md-close-circle"></ion-icon>
+</ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <button ion-button block clear (click)="login()">test inapp</button>
 </ion-content>

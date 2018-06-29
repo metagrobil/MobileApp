@@ -1,0 +1,10 @@
+<!-- Generated template for the MetricComponent component -->
+<div>
+  {{text}}
+</div>
+<ion-list>
+  <ion-item *ngFor="let device of jeeBackendProviderJee.deviceList">
+    {{device.deviceID}}
+    {{device.deviceType}}
+  </ion-item>
+</ion-list>
