@@ -2,9 +2,51 @@
 <div>
   {{text}}
 </div>
-<ion-list>
-  <ion-item *ngFor="let device of jeeBackendProviderJee.deviceList">
-    {{device.deviceID}}
-    {{device.deviceType}}
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>Device Name</ion-col>
+    <ion-col col-4>Device Type</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let device of jeeBackendProviderJee.deviceList">
+    <ion-col col-4>{{device.deviceName}}</ion-col>
+    <ion-col col-4>{{device.deviceType}}</ion-col>
+  </ion-row>
+</ion-grid>
+<button (click)="jeeBackendProviderJee.ListingLInkedDevices()" ion-button icon-start>
+  <ion-icon name="md-refresh"></ion-icon>
+  Refresh
+</button>
+
+<ion-item>
+    <ion-label floating>Device ID</ion-label>
+    <ion-input type="text"></ion-input>
   </ion-item>
-</ion-list>
+<ion-item>
+  <ion-label floating>Start date</ion-label>
+  <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate"></ion-datetime>
+</ion-item>
+<ion-item>
+  <ion-label floating>End Date</ion-label>
+  <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="myDate2" #endDate></ion-datetime>
+</ion-item>
+<button (click)="jeeBackendProviderJee.GetCalculatedMetrics()" ion-button icon-start>
+  <ion-icon name="md-calculator"></ion-icon>
+  Calculated Metric
+</button>
+<button (click)="jeeBackendProviderJee.GetSimpleMetrics(endDate.value)" ion-button icon-start>
+  <ion-icon name="md-flask"></ion-icon>
+  Simple Metric
+</button>
+<ion-grid>
+  <ion-row>
+    <ion-col col-4>Value</ion-col>
+    <ion-col col-4>Unit</ion-col>
+    <ion-col col-4>Range</ion-col>
+  </ion-row>
+  <ion-row *ngFor="let metric of jeeBackendProviderJee.metricList">
+    <ion-col col-4>{{metric.value}}</ion-col>
+    <ion-col col-4>{{metric.unit}}</ion-col>
+    <ion-col col-4>{{metric.range}}</ion-col>
+  </ion-row>
+</ion-grid>

@@ -8,7 +8,11 @@
         <ion-icon (click)="currentPage = ''" class="icon-header" name="md-close-circle"></ion-icon>
 </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content padding *ngIf="currentPage == ''">
     <button ion-button block clear (click)="login()">test inapp</button>
     <ion-label>{{token}}</ion-label>
+</ion-content>
+<ion-content  padding *ngIf="currentPage != ''">
+    <metric style="padding-top: 100px" *ngIf="currentPage == 'metric'"></metric>
+    <command *ngIf="currentPage == 'command'"></command>
 </ion-content>

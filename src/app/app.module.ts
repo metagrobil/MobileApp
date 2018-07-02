@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP } from '@ionic-native/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { MyApp } from './app.component';
@@ -24,6 +26,7 @@ import { JeeBackendProvider } from '../providers/jee-backend/jee-backend';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -36,7 +39,8 @@ import { JeeBackendProvider } from '../providers/jee-backend/jee-backend';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     InAppBrowser,
-    JeeBackendProvider
+    JeeBackendProvider,
+    HTTP
   ]
 })
 export class AppModule {}

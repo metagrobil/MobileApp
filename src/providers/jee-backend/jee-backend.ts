@@ -11,23 +11,51 @@ import 'rxjs/add/operator/map';
 export class JeeBackendProvider {
 
   deviceList :any = [];
+  metricList :any = [];
+  user: string = "Bapt";
   constructor(public http: Http) {
     console.log('Hello JeeBackendProvider Provider');
   }
 
-  loadDevices(): void {
-    this.deviceList = [
-      {deviceID: "1", deviceType: "Nom1"},
-      {deviceID: "2", deviceType: "Nom2"},
-      {deviceID: "3", deviceType: "Nom3"},
-    ]
+  public ListingLInkedDevices(): void {
+    this.deviceList = [];
+    this.http.get('http://10.133.130.195:11080/Backend/metric/metrics/getUserDevices?username=' + this.user)
+    .map(res => res.json())
+    .subscribe(data => {
+      for( var i = 0 ; i < data[0][1].length ; i++){
+        this.deviceList
+        .push({deviceName: data[0][1][i][0],
+           deviceType: data[0][1][i][1]});
+      }
+     });
+  }
 
+  public GetSimpleMetrics(test): void{
+    alert(typeof(test));
+    this.metricList = [];/*
+    this.http.get('http://10.133.130.195:11080/Backend/metric/metrics/getMetric')
+    .map(res => res.json())
+    .subscribe(data => {
+      alert(data[0].idDevices);
+      for( var i = 0 ; i < data.length ; i++){
+        this.metricList
+        .push({value: data[i].idDevices,
+           unit: data[i].value,
+           range : "simple"});
+      }
+     });*/
+  }
+
+  public GetCalculatedMetrics(): void{
+    this.metricList = [];
     this.http.get('https://reqres.in/api/users')
     .map(res => res.json())
     .subscribe(data => {
-      console.log(data.data.lenght);
-      for( var i = 0 ; i < data.data.lenght ; i++){
-        console.log(i);
+      for( var i = 0 ; i < data.data.length ; i++){
+        this.metricList
+        .push({value: data.data[i].id,
+           unit: data.data[i].first_name,
+           range : data.data[i].first_name});
       }
      });
   }

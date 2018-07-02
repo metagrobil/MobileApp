@@ -14,10 +14,10 @@ import { JeeBackendProvider } from '../../providers/jee-backend/jee-backend'
 export class MetricComponent {
 
   text: string;
+  user: string = "Baptiste";
 
   constructor(public jeeBackendProviderJee : JeeBackendProvider) {
-    this.text = 'MetricComponent';
-    this.jeeBackendProviderJee.loadDevices();
+    this.text = this.user + "s Metrics";
   }
 
 }
