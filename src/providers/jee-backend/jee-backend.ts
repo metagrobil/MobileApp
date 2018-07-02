@@ -30,20 +30,28 @@ export class JeeBackendProvider {
      });
   }
 
-  public GetSimpleMetrics(test): void{
-    alert(typeof(test));
-    this.metricList = [];/*
-    this.http.get('http://10.133.130.195:11080/Backend/metric/metrics/getMetric')
+  public GetSimpleMetrics(deviceName ,startDate,endDate): void{
+    console.log(deviceName);
+    console.log(startDate);
+    console.log(endDate);
+    this.metricList = [];
+    this.http.get('http://10.133.130.195:11080/Backend/metric/metrics/getMetricsDeviceDate?'
+                  +'device='+ deviceName
+                  +'&datebegin='+ startDate.year + '-' + this.AddZeroIfmissing(startDate.month) +'-'+ this.AddZeroIfmissing(startDate.day)
+                  +' ' + this.AddZeroIfmissing(startDate.hour) +':' + this.AddZeroIfmissing(startDate.minute) +':00'
+                  +'&dateend='+ endDate.year + '-' + this.AddZeroIfmissing(endDate.month) +'-'+ this.AddZeroIfmissing(endDate.day)
+                  +' ' + this.AddZeroIfmissing(endDate.hour) +':' + this.AddZeroIfmissing(endDate.minute) +':00')
     .map(res => res.json())
     .subscribe(data => {
-      alert(data[0].idDevices);
+      alert(data);
+      alert(data.length);
       for( var i = 0 ; i < data.length ; i++){
         this.metricList
-        .push({value: data[i].idDevices,
-           unit: data[i].value,
-           range : "simple"});
+        .push({value: data[i][0],
+           unit: data[i][1],
+           range : data[i][2]});
       }
-     });*/
+     });
   }
 
   public GetCalculatedMetrics(): void{
@@ -58,6 +66,15 @@ export class JeeBackendProvider {
            range : data.data[i].first_name});
       }
      });
+  }
+
+  public AddZeroIfmissing(baseNumber) : string {
+    if(String(baseNumber).length === 1){
+      return '0' + baseNumber;
+    }
+    else{
+      return baseNumber;
+    }
   }
 
 }
